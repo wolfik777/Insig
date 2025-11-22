@@ -1,0 +1,17 @@
+[
+  {"date": "2025-06-01 09:00:00", "amount": 2200, "category": "Продукты", "description": "Супермаркет"},
+  {"date": "2025-06-01 20:30:00", "amount": 4100, "category": "Еда", "description": "Ресторан"},
+  {"date": "2025-06-02 23:15:00", "amount": 6800, "category": "Электроника", "description": "Ноутбук онлайн"},
+  {"date": "2025-06-03 18:45:00", "amount": 2100, "category": "Транспорт", "description": "Такси"},
+  {"date": "2025-06-04 22:00:00", "amount": 3900, "category": "Одежда", "description": "Онлайн шоппинг"},
+  {"date": "2025-06-05 19:15:00", "amount": 1500, "category": "Продукты", "description": "Магазин"},
+  {"date": "2025-06-06 21:45:00", "amount": 7500, "category": "Развлечения", "description": "Клуб"},
+  {"date": "2025-06-07 02:30:00", "amount": 3400, "category": "Красота", "description": "Салон"},
+  {"date": "2025-06-08 17:00:00", "amount": 1200, "category": "Еда", "description": "Доставка"},
+  {"date": "2025-06-09 22:45:00", "amount": 5600, "category": "Электроника", "description": "Смартфон"},
+  {"date": "2025-06-10 20:00:00", "amount": 1800, "category": "Продукты", "description": "Супермаркет"},
+  {"date": "2025-06-11 23:30:00", "amount": 4300, "category": "Одежда", "description": "Онлайн покупка"},
+  {"date": "2025-06-12 19:30:00", "amount": 2600, "category": "Развлечения", "description": "Кино"},
+  {"date": "2025-06-13 01:00:00", "amount": 5100, "category": "Электроника", "description": "Планшет"}
+]
+

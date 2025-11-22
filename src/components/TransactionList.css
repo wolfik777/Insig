@@ -1,0 +1,257 @@
+.transaction-list-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.transaction-list-header h2 {
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.transaction-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.control-select {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.control-select:hover {
+  border-color: #667eea;
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.control-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.control-button:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.transaction-item {
+  background: #f8f9ff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.transaction-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.transaction-info {
+  flex: 1;
+}
+
+.transaction-info h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.transaction-date {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.transaction-category {
+  color: #667eea;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.transaction-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.amount.positive {
+  color: #22c55e;
+}
+
+.amount.negative {
+  color: #ef4444;
+}
+
+.badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-night {
+  background: #1e293b;
+  color: white;
+}
+
+.badge-evening {
+  background: #fbbf24;
+  color: #78350f;
+}
+
+.badge-day {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  .transaction-list-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .transaction-list-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .transaction-list-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .transaction-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .control-select,
+  .control-button {
+    flex: 1;
+    min-width: 120px;
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .transaction-item {
+    padding: 1rem;
+  }
+
+  .transaction-main {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .transaction-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .transaction-amount {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .amount {
+    font-size: 1.3rem;
+  }
+}
+
+/* Маленькие мобильные устройства */
+@media (max-width: 480px) {
+  .transaction-list-container {
+    padding: 1rem;
+  }
+
+  .transaction-list-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .transaction-controls {
+    flex-direction: column;
+  }
+
+  .control-select,
+  .control-button {
+    width: 100%;
+  }
+
+  .transaction-item {
+    padding: 0.75rem;
+  }
+
+  .transaction-info h3 {
+    font-size: 1rem;
+  }
+
+  .transaction-date {
+    font-size: 0.85rem;
+  }
+
+  .amount {
+    font-size: 1.2rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+  }
+}
+

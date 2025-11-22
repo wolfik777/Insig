@@ -1,0 +1,11 @@
+# Автоматическое определение конца строки
+* text=auto
+
+# Игнорировать изменения в окончаниях строк для бинарных файлов
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+

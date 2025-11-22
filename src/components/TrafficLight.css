@@ -1,0 +1,109 @@
+.traffic-light-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.traffic-light {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+}
+
+.traffic-light.green {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+}
+
+.traffic-light.yellow {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 0 40px rgba(245, 158, 11, 0.6);
+}
+
+.traffic-light.red {
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+}
+
+.traffic-light.blinking {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+}
+
+.light-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.traffic-light-status {
+  text-align: center;
+}
+
+.traffic-light-status h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.traffic-light-status p {
+  color: #666;
+  font-size: 1rem;
+  max-width: 400px;
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  .traffic-light {
+    width: 120px;
+    height: 120px;
+  }
+
+  .traffic-light-status h2 {
+    font-size: 1.2rem;
+  }
+
+  .traffic-light-status p {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+}
+
+/* Маленькие мобильные устройства */
+@media (max-width: 480px) {
+  .traffic-light {
+    width: 100px;
+    height: 100px;
+  }
+
+  .traffic-light-status h2 {
+    font-size: 1.1rem;
+  }
+
+  .traffic-light-status p {
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
+}
+
