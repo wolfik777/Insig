@@ -13,7 +13,18 @@ from werkzeug.utils import secure_filename
 import json
 
 app = Flask(__name__)
-CORS(app)
+# CORS настройки для работы с Vercel и локальной разработкой
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "https://*.vercel.app",
+            "https://insight.vercel.app"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 # Получаем абсолютный путь к директории, где находится app.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,0 +1,17 @@
+[Unit]
+Description=Insight Backend API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/path/to/Insight/backend
+Environment="FLASK_ENV=production"
+Environment="FLASK_PORT=5000"
+ExecStart=/usr/bin/python3 /path/to/Insight/backend/app.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
