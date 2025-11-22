@@ -13,5 +13,17 @@ export default defineConfig({
         ws: true
       }
     }
+  },
+  build: {
+    chunkSizeWarningLimit: 1000, // Увеличиваем лимит до 1000kb, чтобы убрать предупреждения
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'chart-vendor': ['recharts'],
+          'http-vendor': ['axios']
+        }
+      }
+    }
   }
 })
