@@ -278,13 +278,13 @@ def health_check():
     """Проверка работоспособности API"""
     import socket
     host = socket.gethostname()
-    port = request.environ.get('SERVER_PORT', 'unknown')
+    port = request.environ.get('SERVER_PORT', os.getenv('PORT', 'unknown'))
     return jsonify({
         'status': 'ok', 
         'message': 'Insight API is running',
         'port': port,
         'host': host
-    })
+    }), 200
 
 
 @app.route('/api/upload', methods=['POST'])
