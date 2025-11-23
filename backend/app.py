@@ -599,71 +599,65 @@ if __name__ == '__main__':
     import socket
     import os
     
-    def find_free_port(start_port=5000, max_attempts=10):
-        """Поиск свободного порта"""
-        for port in range(start_port, start_port + max_attempts):
-            try:
-                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                    s.bind(('127.0.0.1', port))
-                    return port
-            except OSError:
-                continue
-        return None
-    
-    # Проверяем переменную окружения или используем порт по умолчанию
-    default_port = int(os.getenv('FLASK_PORT', 5000))
-    
-    # Сначала пытаемся использовать порт по умолчанию
-    port = default_port
-    
-    # Проверяем, свободен ли порт
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(('127.0.0.1', port))
-    except OSError:
-        # Порт занят, пытаемся найти свободный
-        print(f"⚠️  Порт {default_port} занят, ищем свободный порт...")
-        port = find_free_port(default_port + 1, max_attempts=5)
-        
-        if port is None:
-            print("\n❌ Не удалось найти свободный порт!")
-            print("\n💡 Решения:")
-            print("   1. Закройте приложение, использующее порт 5000:")
-            print("      Windows: netstat -ano | findstr :5000")
-            print("      Linux/Mac: lsof -i :5000")
-            print("   2. Или убейте процесс:")
-            print("      Windows: taskkill /PID <номер> /F")
-            print("      Linux/Mac: kill -9 <номер>")
-            print("   3. Или используйте другой порт:")
-            print("      set FLASK_PORT=8080 (Windows)")
-            print("      export FLASK_PORT=8080 (Linux/Mac)")
-            exit(1)
-        
-        print(f"⚠️  ВНИМАНИЕ: Backend запущен на порту {port} вместо {default_port}")
-        print(f"⚠️  Обновите vite.config.js: target: 'http://localhost:{port}'")
-        print(f"⚠️  Или закройте процесс на порту 5000 и перезапустите Backend")
-    
-    # Проверяем, запущены ли мы на Railway/Heroku
+    # ПРИОРИТЕТ: Проверяем переменную PORT (Railway/Heroku/Docker)
     railway_port = os.getenv('PORT')
+    
     if railway_port:
+        # Запуск на Railway/Heroku/Docker
         port = int(railway_port)
-        print(f"\n🚀 Insight Backend API запущен на порту {port} (Railway/Heroku)")
-        print(f"🌐 Сервер доступен по адресу вашего Railway/Heroku домена\n")
+        host = '0.0.0.0'  # Слушаем на всех интерфейсах
+        debug = False
+        
+        print(f"\n🚀 Insight Backend API запускается...")
+        print(f"📡 Порт: {port}")
+        print(f"🌐 Host: {host}")
+        print(f"🔧 Режим: Production")
+        print(f"✅ Сервер будет доступен по адресу вашего Railway/Heroku домена\n")
+        
         try:
-            app.run(debug=False, port=port, host='0.0.0.0', use_reloader=False)
-        except OSError as e:
-            print(f"\n❌ Ошибка запуска сервера: {e}")
+            app.run(debug=debug, port=port, host=host, use_reloader=False)
+        except Exception as e:
+            print(f"\n❌ КРИТИЧЕСКАЯ ОШИБКА запуска сервера: {e}")
+            import traceback
+            traceback.print_exc()
             exit(1)
     else:
+        # Локальный запуск
+        def find_free_port(start_port=5000, max_attempts=10):
+            """Поиск свободного порта"""
+            for port in range(start_port, start_port + max_attempts):
+                try:
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                        s.bind(('127.0.0.1', port))
+                        return port
+                except OSError:
+                    continue
+            return None
+        
+        default_port = int(os.getenv('FLASK_PORT', 5000))
+        port = default_port
+        
+        # Проверяем, свободен ли порт
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.bind(('127.0.0.1', port))
+        except OSError:
+            print(f"⚠️  Порт {default_port} занят, ищем свободный порт...")
+            port = find_free_port(default_port + 1, max_attempts=5)
+            
+            if port is None:
+                print("\n❌ Не удалось найти свободный порт!")
+                exit(1)
+            
+            print(f"⚠️  ВНИМАНИЕ: Backend запущен на порту {port} вместо {default_port}")
+        
         print(f"\n🚀 Insight Backend API запущен на http://localhost:{port}")
         print(f"📡 Frontend должен подключаться через прокси на порт {port}")
         print(f"🌐 Откройте http://localhost:3000 в браузере\n")
+        
         try:
             app.run(debug=True, port=port, host='127.0.0.1', use_reloader=False)
-    except OSError as e:
-        print(f"\n❌ Ошибка запуска сервера: {e}")
-        print("\n💡 Решения:")
-        print("   1. Закройте другие приложения, использующие этот порт")
-        print("   2. Запустите от имени администратора")
-        print("   3. Измените порт: set FLASK_PORT=8080 (Windows) или export FLASK_PORT=8080 (Linux/Mac)")
+        except OSError as e:
+            print(f"\n❌ Ошибка запуска сервера: {e}")
+            exit(1)
 
