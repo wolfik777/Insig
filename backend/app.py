@@ -639,12 +639,23 @@ if __name__ == '__main__':
         print(f"⚠️  Обновите vite.config.js: target: 'http://localhost:{port}'")
         print(f"⚠️  Или закройте процесс на порту 5000 и перезапустите Backend")
     
-    print(f"\n🚀 Insight Backend API запущен на http://localhost:{port}")
-    print(f"📡 Frontend должен подключаться через прокси на порт {port}")
-    print(f"🌐 Откройте http://localhost:3000 в браузере\n")
-    
-    try:
-        app.run(debug=True, port=port, host='127.0.0.1', use_reloader=False)
+    # Проверяем, запущены ли мы на Railway/Heroku
+    railway_port = os.getenv('PORT')
+    if railway_port:
+        port = int(railway_port)
+        print(f"\n🚀 Insight Backend API запущен на порту {port} (Railway/Heroku)")
+        print(f"🌐 Сервер доступен по адресу вашего Railway/Heroku домена\n")
+        try:
+            app.run(debug=False, port=port, host='0.0.0.0', use_reloader=False)
+        except OSError as e:
+            print(f"\n❌ Ошибка запуска сервера: {e}")
+            exit(1)
+    else:
+        print(f"\n🚀 Insight Backend API запущен на http://localhost:{port}")
+        print(f"📡 Frontend должен подключаться через прокси на порт {port}")
+        print(f"🌐 Откройте http://localhost:3000 в браузере\n")
+        try:
+            app.run(debug=True, port=port, host='127.0.0.1', use_reloader=False)
     except OSError as e:
         print(f"\n❌ Ошибка запуска сервера: {e}")
         print("\n💡 Решения:")

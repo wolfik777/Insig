@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python39", "pip"]
+
+[phases.install]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install -r backend/requirements.txt"
+]
+
+[start]
+cmd = "cd backend && python app.py"
+
+[providers]
+python = "3.9"
