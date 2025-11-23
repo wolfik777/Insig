@@ -8,7 +8,7 @@ cmds = [
 ]
 
 [start]
-cmd = "cd backend && python app.py"
+cmd = "python backend/app.py"
 
 [providers]
 python = "3.9"

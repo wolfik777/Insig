@@ -27,7 +27,11 @@ CORS(app, resources={
 })
 
 # Получаем абсолютный путь к директории, где находится app.py
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Поддержка запуска из корня проекта (Railway) и из папки backend
+if os.path.basename(os.getcwd()) == 'backend':
+    BASE_DIR = os.getcwd()
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Конфигурация
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'data', 'uploads')
