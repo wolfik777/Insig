@@ -14,15 +14,13 @@ import json
 
 app = Flask(__name__)
 # CORS настройки для работы с Vercel и локальной разработкой
+# Разрешаем все origins для Vercel (так как домены могут быть разными)
 CORS(app, resources={
     r"/api/*": {
-        "origins": [
-            "http://localhost:3000",
-            "https://*.vercel.app",
-            "https://insight.vercel.app"
-        ],
+        "origins": "*",  # Разрешаем все домены (для Vercel)
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": False
     }
 })
 
